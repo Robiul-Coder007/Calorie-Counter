@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card p-4 shadow-sm">
+    <h1>Calorie Counter</h1>
+
+    <p>
+        Calculate your daily calorie requirement
+        and track your consumed calories.
+    </p>
+    {% if user.is_authenticated %}
+    <p><a class="btn btn-primary mt-3" href="{% url 'dashboard' %}">Go to Dashboard</a></p>
+    {% else %}
+    <p>
+        <a class="btn btn-primary mt-3" href="{% url 'user_login' %}">Login</a>
+        <a class="btn btn-primary mt-3" href="{% url 'user_register' %}">Create Account</a>
+    </p>
+    {% endif %}
+</div>
+{% endblock %}

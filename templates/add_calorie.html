@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card p-4 shadow-sm">
+    <h2>Add Consumed Calories</h2>
+
+    <form method="POST">
+        {% csrf_token %}
+
+        {{ form.as_p }}
+        <p><button type="submit" class="btn btn-primary mt-3">Add Calorie</button></p>
+    </form>
+</div>
+<br>
+<div class="card p-4 shadow-sm">
+    <h3>Example</h3>
+
+    <p>Item Name: Rice</p>
+    <p>Calorie Consumed: 250</p>
+</div>
+{% endblock %}

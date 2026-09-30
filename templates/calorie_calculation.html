@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="card p-4 shadow-sm">
+    <h2>Calorie Calculation</h2>
+
+    <p><strong>Name: </strong>{{ profile.name }}</p>
+    <p><strong>Age: </strong>{{ profile.age }} years</p>
+    <p><strong>Gender: </strong>{{ profile.gender }}</p>
+    <p><strong>Height: </strong>{{ profile.height }} cm</p>
+    <p><strong>Weight: </strong>{{ profile.weight }} kg</p>
+    <hr>
+    <h2>Required Calories: {{ required_calories }} kcal/day</h2>
+
+    <p>This value is calculated using the BMR formula specified in the project requirements.</p>
+    <p><a class="btn btn-primary mt-3" href="{% url 'dashboard' %}">Go to Dashboard</a></p>
+</div>
+{% endblock %}

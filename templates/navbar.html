@@ -1,0 +1,51 @@
+{% load static %}
+<nav class="navbar navbar-expand-lg bg-body-tertiary shadow-sm">
+  <div class="container-fluid">
+    <a class="navbar-brand fw-bold text-success" href="{% url 'homepage' %}">Calorie Counter</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'homepage' %}">Home</a>
+        </li>
+        {% if request.user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'dashboard' %}">Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'calorie_calculation' %}">Calorie Calculation</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle fw-semibold text-primary" href="#" role="button" data-bs-toggle="dropdown"
+            aria-expanded="false">
+            Hi, {{ request.user.username }}
+          </a>
+          <ul class="dropdown-menu">
+            <li><a class="dropdown-item" href="{% url 'profile_view' %}">My Profile</a></li>
+            <li><a class="dropdown-item" href="{% url 'change_pass' %}">Change Password</a></li>
+            <li>
+              <hr class="dropdown-divider">
+            </li>
+            <li><a class="dropdown-item text-danger fw-semibold" href="{% url 'user_logout' %}">Logout</a></li>
+          </ul>
+        </li>
+        {% else %}
+        <li class="nav-item">
+          <a class="nav-link fw-semibold" href="{% url 'user_login' %}">Login</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link btn btn-success text-white btn-sm px-3 ms-2" href="{% url 'user_register' %}">Register</a>
+        </li>
+        {% endif %}
+      </ul>
+      <form class="d-flex" role="search" method="GET" action="#">
+        <input class="form-control me-2" type="text" name="search" value="{{ request.GET.search|default:'' }}"
+          placeholder="Search Food..." aria-label="Search" />
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>

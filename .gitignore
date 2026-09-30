@@ -1,0 +1,20 @@
+# Django default guidelines
+*.pyc
+__pycache__/
+/db.sqlite3
+/media
+
+# Virtual Environment
+env/
+venv/
+.env
+.env.*
+
+# IDE and editor files
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.swp

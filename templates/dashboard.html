@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1 class="text-center">Welcome, {{ request.user.username }}!</h1>
+
+{% if profile %}
+<div class="card p-4 shadow-sm">
+    <h2>Hello, {{ profile.name }}!</h2>
+    <h3>Your Required Calories</h3>
+    <h1>{{ required_calories }} kcal</h1>
+    <p>Estimated daily requirement based on your profile information.</p>
+</div>
+<br>
+<div class="card p-4 shadow-sm">
+    <h3>Today's Consumed Calories</h3>
+    <h1>{{ consumed_calories }} kcal</h1>
+    <p>Date: {{ today }}</p>
+</div>
+<br>
+<div class="card p-4 shadow-sm">
+    <h3>Remaining Calories</h3>
+
+    {% if remaining_calories >= 0 %}
+    <h1>{{ remaining_calories }} kcal</h1>
+    <p>You have {{ remaining_calories }} kcal remaining for today.</p>
+    {% else %}
+    <h1>{{ remaining_calories }} kcal</h1>
+    <p>Your consumed calories have exceeded the calculated requirement.</p>
+    {% endif %}
+</div>
+<br>
+<div class="card p-4 shadow-sm">
+    <div class="d-flex justify-content-between">
+        <h5 class="fw-bold">Daily Calorie Progress:</h5>
+        <span>{{ progress }}%</span>
+    </div>
+    <div class="progress mt-3" style="height: 25px;">
+        <div class="progress-bar" role="progressbar"
+            style="--progress-width: {{ progress }}%; width: var(--progress-width);">
+            {{ progress }}%
+        </div>
+    </div>
+</div>
+<br>
+<div class="alert alert-info mt-1 shadow-sm">
+    <strong>Guideline:</strong> {{ guideline }}
+</div>
+<br>
+<div class="card p-4 shadow-sm">
+    <h2>Today's Food</h2>
+
+    {% if calorie_items %}
+    <table class="table table-success table-striped-columns" style="width:100%;">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Calories</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in calorie_items %}
+            <tr>
+                <td>{{ item.item_name }}</td>
+                <td>{{ item.calorie_consumed }} kcal</td>
+                <th>
+                    <a href="{% url 'delete_calorie' item.id %}"
+                        onclick="return confirm('Are you sure you want to delete this food item?');">Delete</a>
+                </th>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No calorie entries have been added today.</p>
+    {% endif %}
+    <p><a class="btn btn-primary mt-3 text-white" href="{% url 'add_calorie' %}"> + Add Food / Calorie</a></p>
+</div>
+<br>
+<div class="card p-4 shadow-sm">
+    <h2>Your Profile</h2>
+
+    <p><strong>Name: </strong>{{ profile.name }}</p>
+    <p><strong>Age: </strong>{{ profile.age }}</p>
+    <p><strong>Gender: </strong>{{ profile.gender }}</p>
+    <p><strong>Height: </strong>{{ profile.height }} cm</p>
+    <p><strong>Weight: </strong>{{ profile.weight }} kg</p>
+    <p><a class="btn btn-primary mt-3 text-white" href="{% url 'profile_view' %}">Update Profile</a></p>
+</div>
+{% else %}
+<br>
+<div class="card p-4 shadow-sm">
+    <h2>Profile Not Found</h2>
+
+    <p>Please create your profile first.</p>
+    <p><a class="btn btn-primary mt-3" href="{% url 'profile_view' %}">Create Profile</a></p>
+</div>
+{% endif %}
+{% endblock %}
