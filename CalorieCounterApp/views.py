@@ -93,7 +93,7 @@ def dashboard(request):
     try:
         profile = request.user.profile
     except UserProfile.DoesNotExist:
-        profile = None
+        return redirect('profile_view')
 
     required_calories = 0
     consumed_calories = 0
