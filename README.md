@@ -15,7 +15,7 @@ Follow the steps below to run the project on your local computer:
 
 ### 1. Clone the project
 ```bash
-git clone https://github.com
+git clone https://github.com/Robiul-Coder007/Calorie-Counter
 cd calorie-counter
 ```
 
